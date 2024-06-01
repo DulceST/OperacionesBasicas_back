@@ -1,0 +1,81 @@
+# "org" ensures this Service is used with the correct Serverless Framework Access Key.
+org: mainz
+# "app" enables Serverless Framework Dashboard features and sharing them with other Services.
+app: operaciones
+# "service" is the name of this project. This will also be added to your AWS resource names.
+service: operaciones
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  httpApi:
+    cors:
+      allowedOrigins:
+        - '*'
+      allowedMethods:
+        - GET
+        - POST
+        - PUT
+        - DELETE
+      allowedHeaders:
+        - Content-Type
+        - X-Amz-Date
+        - Authorization
+        - X-Api-Key
+        - X-Amz-Security-Token
+        - X-Amz-User-Agent
+
+functions:
+  media:
+    handler: handler.media
+    role: arn:aws:iam::122881621474:role/LabRole
+    events:
+      - httpApi:
+          path: /media
+          method: POST
+          cors: true
+
+  mediana:
+    handler: handler.mediana
+    role: arn:aws:iam::122881621474:role/LabRole
+    events:
+      - httpApi:
+          path: /mediana
+          method: POST
+          cors: true
+
+  moda:
+    handler: handler.moda
+    role: arn:aws:iam::122881621474:role/LabRole
+    events:
+      - httpApi:
+          path: /moda
+          method: POST
+          cors: true
+
+  varianza:
+    handler: handler.varianza
+    role: arn:aws:iam::122881621474:role/LabRole
+    events:
+      - httpApi:
+          path: /varianza
+          method: POST
+          cors: true
+
+  desviacionEstandar:
+    handler: handler.desviacionEstandar
+    role: arn:aws:iam::122881621474:role/LabRole
+    events:
+      - httpApi:
+          path: /desviacion-estandar
+          method: POST
+          cors: true
+
+  rango:
+    handler: handler.rango
+    role: arn:aws:iam::122881621474:role/LabRole
+    events:
+      - httpApi:
+          path: /rango
+          method: POST
+          cors: true
